@@ -1,0 +1,58 @@
+---
+title: "DATA 211 Project"
+author: "Olivia Phillips"
+date: "`r Sys.Date()`"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Libraries:
+```{r}
+library(readxl)
+library(tidyverse)
+```
+
+# Importing Data:
+```{r}
+FvsA<-read_excel("/Users/OVP/Desktop/DATA 211/DATA 211 Project/Fitbit vs. Apple Watch.xlsx")
+```
+
+# Gathering Information
+```{r}
+mu<-FvsA %>% group_by(Device) %>% summarize(mu_value=mean(Steps))
+mu
+mu1<-mu$mu_value[2]
+mu2<-mu$mu_value[1]
+print(mu1)
+print(mu2)
+```
+
+# Visualizing Steps
+```{r}
+ggplot(data = FvsA, aes(x=Day,y= Steps)) + geom_line(aes(group=Device, color=Device))
+ggplot(data = FvsA, aes(y = Steps)) + geom_boxplot(aes(group=Device))
+```
+
+# Visualizing Distance
+```{r}
+ggplot(data = FvsA, aes(x=Day,y= Distance)) + geom_line(aes(group=Device, color=Device))
+```
+
+# Visualizing Resting Heartrate
+```{r}
+ggplot(data = FvsA, aes(x=Day,y= HR)) + geom_line(aes(group=Device, color=Device))
+```
+
+# Visualizing Calories
+```{r}
+ggplot(data = FvsA, aes(x=Day,y= Calories)) + geom_line(aes(group=Device, color=Device))
+```
+
+# Visualizing Floors Climbed
+```{r}
+ggplot(data = FvsA, aes(x=Day,y= Flights)) + geom_line(aes(group=Device, color=Device))
+```
+
